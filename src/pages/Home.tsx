@@ -96,21 +96,23 @@ function Team() {
   return (
     <section id="equipe" className="section section--surface" aria-labelledby="equipe-title" aria-busy={loading}>
       <div className="container team__inner">
-        <div className="section-head">
+        <div className="section-head team__head">
           <p className="eyebrow">Equipe</p>
           <h2 id="equipe-title" className="h2">Quem atende você</h2>
         </div>
         <Carousel label="Equipe do escritório">
           {equipe.map((m) => (
-            <article key={m.id} className="member">
-              {m.foto_url ? (
-                <img className="member__photo" src={m.foto_url} alt={`Foto de ${m.nome}`} loading="lazy" />
-              ) : (
-                <div className="photo-ph member__photo" role="img" aria-label="Espaço para fotografia">
-                  <ImageIcon size={32} />
-                  <span>[Foto]</span>
-                </div>
-              )}
+            <article key={m.id} className="member" tabIndex={0}>
+              <div className="member__media">
+                {m.foto_url ? (
+                  <img className="member__photo" src={m.foto_url} alt={`Foto de ${m.nome}`} loading="lazy" />
+                ) : (
+                  <div className="photo-ph member__photo" role="img" aria-label="Espaço para fotografia">
+                    <ImageIcon size={32} />
+                    <span>[Foto]</span>
+                  </div>
+                )}
+              </div>
               <div className="member__info">
                 <h3><Txt v={m.nome} /></h3>
                 <p className="member__role"><Txt v={m.cargo} /></p>

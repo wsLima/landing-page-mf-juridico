@@ -1,7 +1,8 @@
 import { Children, useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 
 // Carrossel com rolagem nativa (arrastar no celular, setas e indicadores no computador).
-// Sem rolagem automática, para não atrapalhar a leitura. As setas somem quando tudo cabe na tela.
+// Sem rolagem automática, para não atrapalhar a leitura. Quando tudo cabe na tela, as setas somem
+// e os cartões ficam centralizados.
 
 type Props = { label: string; children: ReactNode };
 
@@ -50,7 +51,7 @@ export function Carousel({ label, children }: Props) {
   };
 
   return (
-    <div className="carousel" role="region" aria-roledescription="carrossel" aria-label={label}>
+    <div className={pos.positions > 1 ? 'carousel' : 'carousel carousel--fit'} role="region" aria-roledescription="carrossel" aria-label={label}>
       <div className="carousel__track" ref={track} tabIndex={0} aria-label={`${label} — use as setas do teclado para rolar`}>
         {slides.map((slide, i) => (
           <div key={i} className="carousel__slide" role="group" aria-roledescription="slide" aria-label={`${i + 1} de ${count}`}>
@@ -60,6 +61,9 @@ export function Carousel({ label, children }: Props) {
       </div>
       {pos.positions > 1 && (
         <div className="carousel__controls">
+          <button className="carousel__arrow" type="button" aria-label="Anterior" disabled={pos.atStart} onClick={() => goTo(pos.index - 1)}>
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
           <div className="carousel__dots">
             {Array.from({ length: pos.positions }, (_, i) => (
               <button
@@ -72,14 +76,9 @@ export function Carousel({ label, children }: Props) {
               />
             ))}
           </div>
-          <div className="carousel__arrows">
-            <button className="carousel__arrow" type="button" aria-label="Anterior" disabled={pos.atStart} onClick={() => goTo(pos.index - 1)}>
-              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M15 5l-7 7 7 7" /></svg>
-            </button>
-            <button className="carousel__arrow" type="button" aria-label="Próximo" disabled={pos.atEnd} onClick={() => goTo(pos.index + 1)}>
-              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 5l7 7-7 7" /></svg>
-            </button>
-          </div>
+          <button className="carousel__arrow" type="button" aria-label="Próximo" disabled={pos.atEnd} onClick={() => goTo(pos.index + 1)}>
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
         </div>
       )}
     </div>

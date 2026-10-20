@@ -96,10 +96,32 @@
 .contact-form textarea { resize: vertical; min-height: 128px; }
 
 /* Equipe */
-.team__inner { display: flex; flex-direction: column; gap: clamp(36px, 5vw, 56px); }
-.member { display: flex; flex-direction: column; gap: 18px; height: 100%; }
-.member__photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
-.member__info { display: flex; flex-direction: column; gap: 6px; padding-top: 16px; border-top: 1px solid var(--accent); }
+.team__inner { display: flex; flex-direction: column; gap: clamp(28px, 4vw, 44px); }
+.team__head { align-items: center; text-align: center; margin: 0 auto; }
+.team__inner .carousel { width: 100%; max-width: 1080px; margin: 0 auto; }
+.member {
+  display: flex; flex-direction: column; gap: 18px; height: 100%; padding-bottom: 24px;
+  background: var(--paper); border: 1px solid var(--line);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.member:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.member__media { overflow: hidden; }
+.member__photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; transition: transform 0.6s ease; }
+.member__info {
+  display: flex; flex-direction: column; gap: 6px; margin: 0 22px; padding-top: 16px;
+  border-top: 1px solid var(--accent); transition: border-color 0.35s ease;
+}
+.member:hover, .member:focus-visible {
+  transform: translateY(-8px); border-color: var(--accent);
+  box-shadow: 0 22px 44px -20px rgba(63, 42, 32, 0.38);
+}
+.member:hover .member__photo, .member:focus-visible .member__photo { transform: scale(1.05); }
+.member:hover .member__info, .member:focus-visible .member__info { border-top-color: var(--brand); }
+@media (prefers-reduced-motion: reduce) {
+  .member, .member__photo { transition: none; }
+  .member:hover, .member:focus-visible { transform: none; }
+  .member:hover .member__photo, .member:focus-visible .member__photo { transform: none; }
+}
 .member h3 { margin: 0; font-family: var(--font-serif); font-weight: 600; font-size: 24px; line-height: 1.2; color: var(--brand); }
 .member h3 .ph { font-family: var(--font-sans); font-size: 16px; }
 .member p { margin: 0; }
