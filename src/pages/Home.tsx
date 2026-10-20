@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { Carousel } from '../components/Carousel';
 import { ImageIcon, InstagramIcon, WhatsAppIcon } from '../components/Icons';
 import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
@@ -99,7 +100,7 @@ function Team() {
           <p className="eyebrow">Equipe</p>
           <h2 id="equipe-title" className="h2">Quem atende você</h2>
         </div>
-        <div className="team__grid">
+        <Carousel label="Equipe do escritório">
           {equipe.map((m) => (
             <article key={m.id} className="member">
               {m.foto_url ? (
@@ -118,7 +119,7 @@ function Team() {
               </div>
             </article>
           ))}
-        </div>
+        </Carousel>
       </div>
     </section>
   );
