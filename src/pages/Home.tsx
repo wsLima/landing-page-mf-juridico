@@ -223,7 +223,7 @@ function Contact() {
           <p className="eyebrow">Contato</p>
           <h2 id="contato-title" className="h2">Fale com o escritório</h2>
           <p>Para informações sobre os serviços e agendamento de atendimento, entre em contato pelos canais abaixo.</p>
-          <a className="btn btn--primary" href={WA_HELLO} target="_blank" rel="noopener">
+          <a className="btn btn--primary" href={WA_HELLO} data-ga-event="generate_lead" data-ga-method="whatsapp" data-ga-location="contato" target="_blank" rel="noopener">
             <WhatsAppIcon />
             Iniciar conversa no WhatsApp
           </a>
@@ -231,10 +231,10 @@ function Contact() {
             <div>
               <dt>Telefone</dt>
               <dd className="contact-list__multi">
-                {contato.telefones.map((t) => <a key={t.tel} href={`tel:${t.tel}`}>{t.label}</a>)}
+                {contato.telefones.map((t) => <a key={t.tel} href={`tel:${t.tel}`} data-ga-event="generate_lead" data-ga-method="telefone" data-ga-location="contato">{t.label}</a>)}
               </dd>
             </div>
-            <div><dt>E-mail</dt><dd><a href={`mailto:${contato.email}`}>{contato.email}</a></dd></div>
+            <div><dt>E-mail</dt><dd><a href={`mailto:${contato.email}`} data-ga-event="generate_lead" data-ga-method="email" data-ga-location="contato">{contato.email}</a></dd></div>
             <div><dt>Horário</dt><dd>{contato.horario}</dd></div>
             <div>
               <dt>Atendimento</dt>
@@ -275,7 +275,7 @@ function Contact() {
             </span>
           </label>
           {canSend ? (
-            <a className="btn btn--primary btn--block" href={whatsappLink(texto)} target="_blank" rel="noopener">
+            <a className="btn btn--primary btn--block" href={whatsappLink(texto)} data-ga-event="generate_lead" data-ga-method="formulario_whatsapp" data-ga-location="contato" target="_blank" rel="noopener">
               Enviar mensagem pelo WhatsApp
             </a>
           ) : (

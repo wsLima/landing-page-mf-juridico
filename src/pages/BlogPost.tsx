@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { track } from '../lib/analytics';
 import { Newsletter } from '../components/Newsletter';
 import { MiniFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
@@ -8,13 +9,16 @@ import '../styles/blog.css';
 
 export default function BlogPost() {
   usePageTitle('[Título do artigo] | Blog | MF Escritório Jurídico');
+  const { slug = '' } = useParams();
   const [copied, setCopied] = useState(false);
   const url = typeof window !== 'undefined' ? window.location.href : '';
+  const share = (method: string) => track('share', { method, content_type: 'artigo', item_id: slug });
 
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
+      share('copiar_link');
     } catch {
       setCopied(false);
     }
@@ -58,8 +62,8 @@ export default function BlogPost() {
             </aside>
             <div className="share">
               <span>Compartilhar:</span>
-              <a className="btn btn--quiet" href={`https://wa.me/?text=${encodeURIComponent(url)}`} target="_blank" rel="noopener">WhatsApp</a>
-              <a className="btn btn--quiet" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`} target="_blank" rel="noopener">LinkedIn</a>
+              <a className="btn btn--quiet" href={`https://wa.me/?text=${encodeURIComponent(url)}`} target="_blank" rel="noopener" onClick={() => share('whatsapp')}>WhatsApp</a>
+              <a className="btn btn--quiet" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`} target="_blank" rel="noopener" onClick={() => share('linkedin')}>LinkedIn</a>
               <button className="btn btn--quiet" type="button" onClick={copyLink}>{copied ? 'Link copiado' : 'Copiar link'}</button>
             </div>
           </div>

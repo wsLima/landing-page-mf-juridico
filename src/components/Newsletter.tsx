@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { track } from '../lib/analytics';
 
 export function Newsletter() {
   const [email, setEmail] = useState('');
@@ -9,7 +10,9 @@ export function Newsletter() {
   const subscribe = (e: FormEvent) => {
     e.preventDefault();
     // TODO: enviar para o serviço de newsletter (double opt-in).
-    if (canSubscribe) setSubscribed(true);
+    if (!canSubscribe) return;
+    setSubscribed(true);
+    track('sign_up', { method: 'newsletter' });
   };
 
   return (

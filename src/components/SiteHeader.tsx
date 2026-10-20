@@ -42,7 +42,7 @@ export function SiteHeader({ onHome = false, current, showWhatsApp = false }: Pr
         </nav>
         <div className="site-header__actions">
           {showWhatsApp && (
-            <a className="btn btn--outline btn--sm wa-top" href={WA_HELLO} target="_blank" rel="noopener">
+            <a className="btn btn--outline btn--sm wa-top" href={WA_HELLO} data-ga-event="generate_lead" data-ga-method="whatsapp" data-ga-location="cabecalho" target="_blank" rel="noopener">
               <WhatsAppIcon size={17} />
               WhatsApp
             </a>
@@ -67,7 +67,7 @@ export function SiteHeader({ onHome = false, current, showWhatsApp = false }: Pr
           <Link className="nav-link" to="/blog" aria-current={blogCurrent} onClick={close}>Blog</Link>
           <a className="nav-link" href={href('contato')} onClick={close}>Contato</a>
           {showWhatsApp && (
-            <a className="btn btn--primary btn--block" href={WA_HELLO} target="_blank" rel="noopener">
+            <a className="btn btn--primary btn--block" href={WA_HELLO} data-ga-event="generate_lead" data-ga-method="whatsapp" data-ga-location="menu_movel" target="_blank" rel="noopener">
               Conversar pelo WhatsApp
             </a>
           )}
