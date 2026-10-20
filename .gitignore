@@ -1,0 +1,14 @@
+node_modules
+dist
+*.tsbuildinfo
+
+# Variáveis de ambiente (chaves e números) — nunca versionar; use .env.example como modelo
+.env
+.env.local
+.env.*.local
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json

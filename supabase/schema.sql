@@ -1,0 +1,52 @@
+-- Banco de dados do site MF Escritório Jurídico.
+-- Rode este arquivo uma vez no Supabase: painel do projeto › SQL Editor › New query › colar › Run.
+
+-- Áreas de atuação
+create table if not exists public.areas (
+  id uuid primary key default gen_random_uuid(),
+  nome text not null,
+  descricao text not null default '',
+  ordem integer not null default 0,
+  created_at timestamptz not null default now()
+);
+
+-- Equipe
+create table if not exists public.equipe (
+  id uuid primary key default gen_random_uuid(),
+  nome text not null,
+  cargo text not null,
+  oab text,
+  bio text,
+  foto_url text,
+  ordem integer not null default 0,
+  created_at timestamptz not null default now()
+);
+
+-- Segurança: qualquer visitante pode LER (o site precisa mostrar os dados);
+-- só usuários logados no painel podem criar, editar e excluir.
+alter table public.areas enable row level security;
+alter table public.equipe enable row level security;
+
+drop policy if exists "areas: leitura pública" on public.areas;
+create policy "areas: leitura pública" on public.areas for select using (true);
+drop policy if exists "areas: edição pelo painel" on public.areas;
+create policy "areas: edição pelo painel" on public.areas for all to authenticated using (true) with check (true);
+
+drop policy if exists "equipe: leitura pública" on public.equipe;
+create policy "equipe: leitura pública" on public.equipe for select using (true);
+drop policy if exists "equipe: edição pelo painel" on public.equipe;
+create policy "equipe: edição pelo painel" on public.equipe for all to authenticated using (true) with check (true);
+
+-- Fotos da equipe (Storage)
+insert into storage.buckets (id, name, public)
+values ('equipe', 'equipe', true)
+on conflict (id) do nothing;
+
+drop policy if exists "fotos equipe: leitura pública" on storage.objects;
+create policy "fotos equipe: leitura pública" on storage.objects for select using (bucket_id = 'equipe');
+drop policy if exists "fotos equipe: envio pelo painel" on storage.objects;
+create policy "fotos equipe: envio pelo painel" on storage.objects for insert to authenticated with check (bucket_id = 'equipe');
+drop policy if exists "fotos equipe: troca pelo painel" on storage.objects;
+create policy "fotos equipe: troca pelo painel" on storage.objects for update to authenticated using (bucket_id = 'equipe');
+drop policy if exists "fotos equipe: exclusão pelo painel" on storage.objects;
+create policy "fotos equipe: exclusão pelo painel" on storage.objects for delete to authenticated using (bucket_id = 'equipe');
