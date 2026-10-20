@@ -5,10 +5,28 @@ export const INSTAGRAM_HANDLE = '@mfescritoriojuridico';
 
 // Áreas de atuação e equipe são cadastradas pela área administrativa (/admin) e ficam no Supabase.
 // As listas abaixo são só demonstração: aparecem enquanto o Supabase não estiver configurado (ver README).
-export const areasDemo = [1, 2, 3, 4].map((n) => ({
-  nome: `[Área de atuação ${n}]`,
-  descricao: '[Descrição informativa curta sobre os temas atendidos nesta área.]',
-}));
+export const areasDemo = [
+  {
+    nome: 'Advocacia Preventiva',
+    descricao:
+      'Orientação jurídica para proteger decisões, negócios e relações, identificando riscos antes que se tornem conflitos.',
+  },
+  {
+    nome: 'Direito do Consumidor',
+    descricao:
+      'Questões envolvendo compras, prestação de serviços, cobranças indevidas, produtos com defeito e demais relações de consumo.',
+  },
+  {
+    nome: 'Direito Civil',
+    descricao:
+      'Contratos, responsabilidade civil, indenizações, cobranças e outras questões do dia a dia entre pessoas e empresas.',
+  },
+  {
+    nome: 'Assessoria para Autônomos e Pequenos Negócios',
+    descricao:
+      'Apoio jurídico contínuo para profissionais autônomos e pequenas empresas: contratos, relações com clientes e fornecedores e prevenção de riscos.',
+  },
+];
 
 export const equipeDemo = [
   { nome: '[Nome do(a) advogado(a)]', cargo: 'Advogado(a) responsável', oab: '[OAB/AM 000.000]', bio: '[Formação e principais áreas de atuação.]' },

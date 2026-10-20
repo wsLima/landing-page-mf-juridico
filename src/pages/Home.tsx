@@ -63,16 +63,16 @@ function About() {
       <div className="container split">
         <div className="section-head">
           <p className="eyebrow">O Escritório</p>
-          <h2 id="sobre-title" className="h2">Orientação jurídica com responsabilidade e proximidade.</h2>
+          <h2 id="sobre-title" className="h2">O compromisso do escritório com você</h2>
         </div>
         <div className="about__body">
           <p>
-            O MF Escritório Jurídico acompanha cada pessoa com atenção às particularidades do seu caso, buscando
-            explicar com clareza os caminhos possíveis, os prazos envolvidos e os cuidados necessários em cada etapa.
+            Acreditamos que um bom atendimento jurídico vai além do conhecimento técnico. Por isso, cada cliente é
+            atendido com <strong>ética, transparência e atenção às suas necessidades</strong>.
           </p>
           <p>
-            A atuação do escritório é orientada pela ética profissional, pelo sigilo das informações confiadas e pelo
-            cumprimento das normas que regem a advocacia.
+            Nosso compromisso é oferecer orientação clara, estratégias personalizadas e acompanhamento{' '}
+            <strong>em todas as etapas do processo</strong>.
           </p>
           <p>
             <span className="ph">[Breve histórico do escritório: ano de fundação, cidade de atuação e formato de atendimento — a confirmar]</span>
@@ -137,7 +137,7 @@ function Areas() {
         <div className="areas__head">
           <div className="section-head">
             <p className="eyebrow">Áreas de Atuação</p>
-            <h2 id="areas-title" className="h2">Em que o escritório pode orientar você</h2>
+            <h2 id="areas-title" className="h2">Nossa especialidade</h2>
           </div>
           <p className="areas__note">
             As informações abaixo têm caráter informativo. A análise de cada situação depende de consulta individual.
@@ -173,6 +173,12 @@ function Values() {
             </div>
           ))}
         </div>
+        <blockquote className="values__quote">
+          <p>
+            Nosso objetivo é encontrar <strong>soluções eficientes</strong>, sempre priorizando a prevenção de conflitos
+            e a defesa dos interesses dos nossos clientes.
+          </p>
+        </blockquote>
       </div>
     </section>
   );
